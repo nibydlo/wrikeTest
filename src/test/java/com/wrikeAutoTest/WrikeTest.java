@@ -1,6 +1,7 @@
 package com.wrikeAutoTest;
 
 import net.bytebuddy.utility.RandomString;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,7 +47,7 @@ public class WrikeTest {
         driver.findElements(By.cssSelector(".wg-header__free-trial-button.wg-btn.wg-btn--green")).get(2).click();
 
         // Fill in the email field with randomly generated value of email with mask “<random_text>+wpt@wriketask.qaa” (e.g. “abcdef+wpt@wriketask.qaa”);
-        String email = RandomString.make(random.nextInt(9)) + "+wpt@wriketask.qaa";
+        String email = RandomString.make(1 + random.nextInt(9)) + "+wpt@wriketask.qaa";
         driver.findElement(By.cssSelector(".wg-input.modal-form-trial__input")).sendKeys(email);
 
         // Click on "Create my Wrike account" button ...
@@ -96,5 +97,10 @@ public class WrikeTest {
         // check if it contains right icon
         String imageAddress = twitterButton.findElement(By.tagName("use")).getAttribute("xlink:href");
         Assert.assertEquals("/content/themes/wrike/dist/img/sprite/vector/footer-icons.symbol.svg?v1#twitter", imageAddress);
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        driver.quit();
     }
 }
