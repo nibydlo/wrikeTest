@@ -28,9 +28,9 @@ public class WrikeTest {
 
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
-        //driver.manage().window().maximize();
         driver.manage().window().setSize(new Dimension(1440, 900));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         // Open url: wrike.com;
         driver.get("https://wrike.com");
 
