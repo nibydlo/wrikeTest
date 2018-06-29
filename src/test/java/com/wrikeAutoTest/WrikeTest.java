@@ -79,7 +79,6 @@ public class WrikeTest {
         }
 
         // press submit butttom
-        wait.until(ExpectedConditions.elementToBeClickable( driver.findElement(By.cssSelector(".submit.wg-btn.wg-btn--navy.js-survey-submit"))));
         driver.findElement(By.cssSelector(".submit.wg-btn.wg-btn--navy.js-survey-submit")).click();
 
         //  + check with assertion that your answers are submitted;
