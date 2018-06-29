@@ -1,11 +1,14 @@
 package com.wrikeAutoTest;
 
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import net.bytebuddy.utility.RandomString;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,7 +28,8 @@ public class WrikeTest {
 
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(1440, 900));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         // Open url: wrike.com;
         driver.get("https://wrike.com");
@@ -61,16 +65,21 @@ public class WrikeTest {
         Assert.assertEquals("https://www.wrike.com/resend/", driver.getCurrentUrl());
 
         // Fill in the Q&A section at the left part of the page (like randomly generated answers)
-        int firstAnswer = random.nextInt(1);
-        int secondAnswer = 2 + random.nextInt(4);
-        int thirdAnswer = 7 + random.nextInt(2);
+
+        int firstAnswer = random.nextInt(2);
+        int secondAnswer = 2 + random.nextInt(5);
+        int thirdAnswer = 7 + random.nextInt(3);
 
         List<WebElement> answers = driver.findElements(By.cssSelector(".switch__button"));
         answers.get(firstAnswer).click();
         answers.get(secondAnswer).click();
         answers.get(thirdAnswer).click();
+        if (thirdAnswer == 9) {
+            driver.findElement(By.cssSelector(".switch__input")).sendKeys("test");
+        }
 
         // press submit butttom
+        wait.until(ExpectedConditions.elementToBeClickable( driver.findElement(By.cssSelector(".submit.wg-btn.wg-btn--navy.js-survey-submit"))));
         driver.findElement(By.cssSelector(".submit.wg-btn.wg-btn--navy.js-survey-submit")).click();
 
         //  + check with assertion that your answers are submitted;
