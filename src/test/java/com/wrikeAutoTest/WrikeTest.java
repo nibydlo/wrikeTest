@@ -23,7 +23,7 @@ public class WrikeTest {
     @BeforeClass
     public static void setup() {
 
-        System.setProperty("webdriver.chrome.driver", "/home/krylov/Desktop/Wrike/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
